@@ -1,0 +1,7 @@
+venv*
+__pycache__
+.vscode
+log/
+
+.scannerwork/.sonar_lock
+.scannerwork/report-task.txt

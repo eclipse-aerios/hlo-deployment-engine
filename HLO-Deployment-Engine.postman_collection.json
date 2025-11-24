@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "369dfc1f-85f4-4beb-ad27-cfff5326f698",
+		"name": "HLO-Deployment-Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3206639"
+	},
+	"item": [
+		{
+			"name": "GET Service Component",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{access_url}}/hlo_al/services/{{service_id}}/service_components/{{service_component_id}}",
+					"host": [
+						"{{access_url}}"
+					],
+					"path": [
+						"hlo_al",
+						"services",
+						"{{service_id}}",
+						"service_components",
+						"{{service_component_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allocate Service Component",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{service_component_id}}\",\n    \"image\": \"image.iso\" ,\n    \"infrastructure_element\": \"urn:ngsi-ld:IE:ncrsrd:001\",\n    \"ports\": {\"number\": 8080}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{access_url}}/hlo_al/services/{{service_id}}",
+					"host": [
+						"{{access_url}}"
+					],
+					"path": [
+						"hlo_al",
+						"services",
+						"{{service_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allocate Service Component Copy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"image\": \"image_new.iso\" ,\n    \"infrastructure_element\": \"urn:ngsi-ld:IE:ncrsrd:002\",\n    \"ports\": {\"number\": 8080}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{access_url}}/hlo_al/services/{{service_id}}/service_components/{{service_component_id}}",
+					"host": [
+						"{{access_url}}"
+					],
+					"path": [
+						"hlo_al",
+						"services",
+						"{{service_id}}",
+						"service_components",
+						"{{service_component_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deallocate Service Component",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{access_url}}/hlo_al/services/{{service_id}}/service_components/{{service_component_id}}",
+					"host": [
+						"{{access_url}}"
+					],
+					"path": [
+						"hlo_al",
+						"services",
+						"{{service_id}}",
+						"service_components",
+						"{{service_component_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "service_id",
+			"value": "service_1",
+			"type": "string"
+		},
+		{
+			"key": "service_component_id",
+			"value": "service_component_1",
+			"type": "string"
+		},
+		{
+			"key": "access_url",
+			"value": "127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}

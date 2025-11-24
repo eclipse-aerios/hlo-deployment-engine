@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hlo-deployment-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.selectorLabels.app }}
+      comp: {{ .Values.selectorLabels.comp }}
+      tier: {{ .Values.selectorLabels.tier }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.selectorLabels.app }}
+        comp: {{ .Values.selectorLabels.comp }}
+        tier: {{ .Values.selectorLabels.tier }}
+    spec:
+      imagePullSecrets:
+      - name: aeriOS-common-deployments
+      containers:
+      - name: allocator
+        image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: CB_URL
+          value: "{{ .Values.EnvVar.cb_url }}"
+        - name: CB_PORT
+          value: "{{ .Values.EnvVar.cb_port }}"
+        - name: HLO_AL_URL
+          value: "{{ .Values.EnvVar.hlo_al_url }}"
+        - name: HLO_AL_PORT
+          value: "{{ .Values.EnvVar.hlo_al_port }}"
+        - name: LLO_REST_URL
+          value: "{{ .Values.EnvVar.llo_url }}"
+        - name: LLO_REST_PORT
+          value: "{{ .Values.EnvVar.llo_port }}"
+        - name: BOOTSTRAP_SERVERS
+          value: "{{ .Values.EnvVar.bootstrapServers }}"
+        - name: GROUP_ID
+          value: "{{ .Values.EnvVar.groupId }}"
+        - name: AUTO_OFFSET_RESET
+          value: "{{ .Values.EnvVar.autoOffsetReset }}"
+        - name: CONSUMER_TOPIC
+          value: "{{ .Values.EnvVar.consumerTopic }}"
+        - name: K8S_SHIM_URL
+          value: "{{ .Values.EnvVar.k8sShimUrl }}"
+        - name: K8S_SHIM_PORT
+          value: "{{ .Values.EnvVar.k8sShimPort }}"
+        - name: OVERLAY_SUBNET
+          value: "{{ .Values.EnvVar.overlay_subnet }}"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hlo-allocator-service
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.selectorLabels.app }}
+    comp: {{ .Values.selectorLabels.comp }}
+    tier: {{ .Values.selectorLabels.tier }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}

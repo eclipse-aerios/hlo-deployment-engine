@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "hlo.proto";
+
+
+message ServiceComponentAllocation {
+    InfrastructureElement old_allocated_infrastructure_element = 1;
+    ServiceComponent new_allocated_service_component = 2;
+}
+
+message HLODeploymentEngineInput {
+    repeated ServiceComponentAllocation service_component_allocations = 1;
+}

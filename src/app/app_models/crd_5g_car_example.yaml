@@ -1,0 +1,19 @@
+ApiVersion: llo.aeriOS-project.eu/v1alpha1
+kind: ServiceComponentK8s
+metadata:
+  labels:
+    app.kubernetes.io/created-by: urn_ngsi-ld_LowLevelOrchestrator_NCSRD_01
+    app.kubernetes.io/instance: urn_ngsi-ld_Service_946f3b70_Component_adf724b9
+    app.kubernetes.io/managed-by: aeriOS-project.eu
+    app.kubernetes.io/name: urn_ngsi-ld_Service_946f3b70_Component_adf724b9
+    app.kubernetes.io/part-of: urn_ngsi-ld_Service_946f3b70
+  name: urn-ngsi-ld-service-946f3b70-component-adf724b9
+spec:
+  cliArgs: []
+  envVars: []
+  image: registry.gitlab.aeriOS-project.eu/aeriOS-public/midterm-demo/5g_vehicle:latest
+  ports:
+  - number: 8000
+    protocol: TCP
+  selectedIE: urn:ngsi-ld:IE:pi
+  privileged: true

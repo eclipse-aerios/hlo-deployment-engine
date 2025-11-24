@@ -1,0 +1,38 @@
+#HLO deployment engine configuration
+image:
+  repository: eclipseaerios/local-allocation-manager:v3.0.0
+  pullPolicy: Always
+
+
+selectorLabels:
+  app: hlo-allocator
+  comp: aeriOS-core
+  tier: hlo
+
+service:
+  type: ClusterIP
+  port: 8082 
+  targetPort: 8000 
+
+
+EnvVar:
+  #Orion-CB
+  cb_url: "http://orion-ld-broker.default.svc.cluster.local"
+  cb_port: "1026"
+  #HLO-AL
+  hlo_al_url: "https://ncsrd-mvp-domain.aeriOS-project.eu"
+  hlo_al_port: "443"
+  #LLO 
+  llo_url: "http://aeriOS-llo-api.default.svc.cluster.local"
+  llo_port: "8090"
+  #Redpanda
+  bootstrapServers: "redpanda-0.redpanda.redpanda.svc.cluster.local:9093"
+  groupId: "python-consumer"
+  autoOffsetReset: "earliest"
+  consumerTopic: "allocator2deployment"
+  #aeriOS-k8s-shim
+  k8sShimUrl: "http://aeriOS-k8s-shim-service.default.svc.cluster.local"
+  k8sShimPort: "8085"
+  overlay_subnet: "10.13.13.0"
+
+
