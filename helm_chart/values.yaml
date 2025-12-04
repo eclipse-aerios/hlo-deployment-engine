@@ -1,6 +1,6 @@
 #HLO deployment engine configuration
 image:
-  repository: eclipseaerios/local-allocation-manager:v3.0.0
+  repository: eclipseaerios/hlo-deployment-engine:v3.0.0
   pullPolicy: Always
 
 
